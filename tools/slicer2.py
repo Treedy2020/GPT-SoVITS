@@ -196,14 +196,14 @@ def main():
         "--db_thresh",
         type=float,
         required=False,
-        default=-40,
+        default=-34,
         help="The dB threshold for silence detection",
     )
     parser.add_argument(
         "--min_length",
         type=int,
         required=False,
-        default=5000,
+        default=3000,
         help="The minimum milliseconds required for each sliced audio clip",
     )
     parser.add_argument(
