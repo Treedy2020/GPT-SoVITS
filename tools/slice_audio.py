@@ -8,7 +8,7 @@ from slicer2 import Slicer
 
 # parent_directory = os.path.dirname(os.path.abspath(__file__))
 # sys.path.append(parent_directory)
-from tools.my_utils import load_audio
+from utils import load_audio
 
 
 def slice(
@@ -65,4 +65,3 @@ def slice(
     return "执行完毕，请检查输出文件"
 
 
-print(slice(*sys.argv[1:]))

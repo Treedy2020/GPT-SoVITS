@@ -27,7 +27,7 @@ from config import (
     webui_port_subfix,
     webui_port_uvr5,
 )
-from tools import my_utils
+from . import utils
 from tools.i18n.i18n import I18nAuto
 
 from multiprocessing import cpu_count
@@ -219,7 +219,7 @@ def kill_process(pid):
 def change_label(if_label, path_list):
     global p_label
     if if_label == True and p_label == None:
-        path_list = my_utils.clean_path(path_list)
+        path_list = utils.clean_path(path_list)
         cmd = (
             '"%s" tools/subfix_webui.py --load_list "%s" --webui_port %s --is_share %s'
             % (python_exec, path_list, webui_port_subfix, is_share)
@@ -287,8 +287,8 @@ from tools.asr.config import asr_dict
 def open_asr(asr_inp_dir, asr_opt_dir, asr_model, asr_model_size, asr_lang):
     global p_asr
     if p_asr == None:
-        asr_inp_dir = my_utils.clean_path(asr_inp_dir)
-        asr_opt_dir = my_utils.clean_path(asr_opt_dir)
+        asr_inp_dir = utils.clean_path(asr_inp_dir)
+        asr_opt_dir = utils.clean_path(asr_opt_dir)
         cmd = f'"{python_exec}" tools/asr/{asr_dict[asr_model]["path"]}'
         cmd += f' -i "{asr_inp_dir}"'
         cmd += f' -o "{asr_opt_dir}"'
@@ -334,8 +334,8 @@ def close_asr():
 def open_denoise(denoise_inp_dir, denoise_opt_dir):
     global p_denoise
     if p_denoise == None:
-        denoise_inp_dir = my_utils.clean_path(denoise_inp_dir)
-        denoise_opt_dir = my_utils.clean_path(denoise_opt_dir)
+        denoise_inp_dir = utils.clean_path(denoise_inp_dir)
+        denoise_opt_dir = utils.clean_path(denoise_opt_dir)
         cmd = '"%s" tools/cmd-denoise.py -i "%s" -o "%s" -p %s' % (
             python_exec,
             denoise_inp_dir,
@@ -554,8 +554,8 @@ def open_slice(
     n_parts,
 ):
     global ps_slice
-    inp = my_utils.clean_path(inp)
-    opt_root = my_utils.clean_path(opt_root)
+    inp = utils.clean_path(inp)
+    opt_root = utils.clean_path(opt_root)
     if os.path.exists(inp) == False:
         yield (
             "输入路径不存在",
@@ -635,8 +635,8 @@ ps1a = []
 
 def open1a(inp_text, inp_wav_dir, exp_name, gpu_numbers, bert_pretrained_dir):
     global ps1a
-    inp_text = my_utils.clean_path(inp_text)
-    inp_wav_dir = my_utils.clean_path(inp_wav_dir)
+    inp_text = utils.clean_path(inp_text)
+    inp_wav_dir = utils.clean_path(inp_wav_dir)
     if ps1a == []:
         opt_dir = "%s/%s" % (exp_root, exp_name)
         config = {
@@ -720,8 +720,8 @@ ps1b = []
 
 def open1b(inp_text, inp_wav_dir, exp_name, gpu_numbers, ssl_pretrained_dir):
     global ps1b
-    inp_text = my_utils.clean_path(inp_text)
-    inp_wav_dir = my_utils.clean_path(inp_wav_dir)
+    inp_text = utils.clean_path(inp_text)
+    inp_wav_dir = utils.clean_path(inp_wav_dir)
     if ps1b == []:
         config = {
             "inp_text": inp_text,
@@ -790,7 +790,7 @@ ps1c = []
 
 def open1c(inp_text, exp_name, gpu_numbers, pretrained_s2G_path):
     global ps1c
-    inp_text = my_utils.clean_path(inp_text)
+    inp_text = utils.clean_path(inp_text)
     if ps1c == []:
         opt_dir = "%s/%s" % (exp_root, exp_name)
         config = {
@@ -878,8 +878,8 @@ def open1abc(
     pretrained_s2G_path,
 ):
     global ps1abc
-    inp_text = my_utils.clean_path(inp_text)
-    inp_wav_dir = my_utils.clean_path(inp_wav_dir)
+    inp_text = utils.clean_path(inp_text)
+    inp_wav_dir = utils.clean_path(inp_wav_dir)
     if ps1abc == []:
         opt_dir = "%s/%s" % (exp_root, exp_name)
         try:

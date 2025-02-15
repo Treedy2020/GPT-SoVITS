@@ -1,0 +1,17 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Slicer",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/tools/slicer2.py",
+            "console": "integratedTerminal",
+            "args": ["data/TTS-女声-水何.wav", 
+            "--out", "output"]
+        }
+    ]
+}
