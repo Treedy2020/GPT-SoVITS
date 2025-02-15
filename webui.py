@@ -286,7 +286,7 @@ from tools.asr.config import asr_dict
 
 def open_asr(asr_inp_dir, asr_opt_dir, asr_model, asr_model_size, asr_lang):
     global p_asr
-    if p_asr == None:
+    if p_asr is None:
         asr_inp_dir = utils.clean_path(asr_inp_dir)
         asr_opt_dir = utils.clean_path(asr_opt_dir)
         cmd = f'"{python_exec}" tools/asr/{asr_dict[asr_model]["path"]}'
@@ -294,7 +294,7 @@ def open_asr(asr_inp_dir, asr_opt_dir, asr_model, asr_model_size, asr_lang):
         cmd += f' -o "{asr_opt_dir}"'
         cmd += f" -s {asr_model_size}"
         cmd += f" -l {asr_lang}"
-        cmd += " -p %s" % ("float16" if is_half == True else "float32")
+        cmd += " -p %s" % ("float16" if is_half else "float32")
 
         yield (
             "ASR任务开启：%s" % cmd,
@@ -321,7 +321,7 @@ def open_asr(asr_inp_dir, asr_opt_dir, asr_model, asr_model_size, asr_lang):
 
 def close_asr():
     global p_asr
-    if p_asr != None:
+    if p_asr is not None:
         kill_process(p_asr.pid)
         p_asr = None
     return (
@@ -333,7 +333,7 @@ def close_asr():
 
 def open_denoise(denoise_inp_dir, denoise_opt_dir):
     global p_denoise
-    if p_denoise == None:
+    if p_denoise is None:
         denoise_inp_dir = utils.clean_path(denoise_inp_dir)
         denoise_opt_dir = utils.clean_path(denoise_opt_dir)
         cmd = '"%s" tools/cmd-denoise.py -i "%s" -o "%s" -p %s' % (
@@ -556,7 +556,7 @@ def open_slice(
     global ps_slice
     inp = utils.clean_path(inp)
     opt_root = utils.clean_path(opt_root)
-    if os.path.exists(inp) == False:
+    if not os.path.exists(inp): 
         yield (
             "输入路径不存在",
             {"__type__": "update", "visible": True},
